@@ -1,0 +1,8 @@
+<h1>Review Detail</h1>
+<p>Review ID: {{ object.pk }}</p>
+<p>User: {{ object.user }}</p>
+<p>Coral: {{ object.coral }}</p>
+<p>Rating: {{ object.rating }}</p>
+<p>Comment: {{ object.comment }}</p>
+<a href="{% url 'review_update' object.pk %}">Edit</a>
+<a href="{% url 'review_delete' object.pk %}">Delete</a>

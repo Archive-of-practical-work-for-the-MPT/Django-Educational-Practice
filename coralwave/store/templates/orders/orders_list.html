@@ -1,0 +1,7 @@
+<h1>Orders</h1>
+<ul>
+  {% for order in object_list %}
+  <li><a href="{% url 'order_detail' order.pk %}">Order #{{ order.pk }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'order_create' %}">Add New Order</a>

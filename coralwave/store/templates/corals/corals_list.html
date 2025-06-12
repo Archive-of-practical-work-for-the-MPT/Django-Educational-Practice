@@ -1,0 +1,11 @@
+<h1>Corals List</h1>
+<ul>
+  {% for coral in corals %}
+  <li>
+    {{ coral.name }} - <a href="{% url 'corals_detail' coral.pk %}">Detail</a> |
+    <a href="{% url 'corals_update' coral.pk %}">Edit</a> |
+    <a href="{% url 'corals_delete' coral.pk %}">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'corals_create' %}">Add New Coral</a>

@@ -1,0 +1,11 @@
+<h1>Certificates</h1>
+<ul>
+  {% for cert in object_list %}
+  <li>
+    <a href="{% url 'certificate_detail' cert.pk %}"
+      >Certificate #{{ cert.pk }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'certificate_create' %}">Add New Certificate</a>

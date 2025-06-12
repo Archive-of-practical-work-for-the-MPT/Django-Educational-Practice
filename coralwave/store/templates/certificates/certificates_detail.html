@@ -1,0 +1,7 @@
+<h1>Certificate Detail</h1>
+<p>Certificate ID: {{ object.pk }}</p>
+<p>User: {{ object.user }}</p>
+<p>Type: {{ object.type }}</p>
+<p>Status: {{ object.status }}</p>
+<a href="{% url 'certificate_update' object.pk %}">Edit</a>
+<a href="{% url 'certificate_delete' object.pk %}">Delete</a>

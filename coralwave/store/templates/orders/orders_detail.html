@@ -1,0 +1,6 @@
+<h1>Order Detail</h1>
+<p>Order ID: {{ object.pk }}</p>
+<p>User: {{ object.user }}</p>
+<p>Status: {{ object.status }}</p>
+<a href="{% url 'order_update' object.pk %}">Edit</a>
+<a href="{% url 'order_delete' object.pk %}">Delete</a>

@@ -1,0 +1,11 @@
+<h1>Reviews</h1>
+<ul>
+  {% for review in object_list %}
+  <li>
+    <a href="{% url 'review_detail' review.pk %}"
+      >Review by {{ review.user }} for {{ review.coral }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'review_create' %}">Add New Review</a>
