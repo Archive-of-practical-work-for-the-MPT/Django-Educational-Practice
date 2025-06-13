@@ -19,8 +19,9 @@
             <h2>Аккаунт: {{ object.username }}</h2>
             <p>Имя пользователя: {{ object.username }}</p>
             <p>Email: {{ object.email }}</p>
-            <a href="{% url 'account_update' object.pk %}">Редактировать</a>
-            <a href="{% url 'account_delete' object.pk %}">Удалить</a>
+            <a href="{% url 'accounts_update' object.pk %}" class="btn-back">Редактировать</a>
+            <a href="{% url 'accounts_delete' object.pk %}" class="btn-back">Удалить</a>
+            <a href="{% url 'accounts_list' %}" class="btn-back">Назад к списку</a>
         </div>
     </main>
     <footer>

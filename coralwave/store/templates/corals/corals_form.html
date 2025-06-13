@@ -1,4 +1,33 @@
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Save</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма коралла</title>
+    <link rel="stylesheet" href="{% static 'css/info.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Форма коралла</h1>
+        <nav>
+            <a href="{% url 'info_view' %}">Главная</a>
+            <a href="{% url 'corals_list' %}">Список кораллов</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>{% if form.instance.pk %}Редактировать коралл{% else %}Создать коралл{% endif %}</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-save">Сохранить</button>
+                <a href="{% url 'corals_list' %}" class="btn-back">Назад</a>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 CoralWave</p>
+    </footer>
+</body>
+</html>

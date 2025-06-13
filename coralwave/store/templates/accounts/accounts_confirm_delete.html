@@ -21,7 +21,7 @@
             <form method="post">
                 {% csrf_token %}
                 <input type="submit" value="Подтвердить" />
-                <a href="{% url 'account_list' %}">Отмена</a>
+                <a href="{% url 'accounts_list' %}" class="btn-back">Назад</a>
             </form>
         </div>
     </main>

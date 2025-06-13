@@ -1,8 +1,36 @@
-<h1>Coral Detail</h1>
-<p>Name: {{ coral.name }}</p>
-<p>Scientific Name: {{ coral.scientific_name }}</p>
-<p>Description: {{ coral.description }}</p>
-<p>Age: {{ coral.age }}</p>
-<p>Reef: {{ coral.id_reef }}</p>
-<p>Category: {{ coral.id_category }}</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали коралла</title>
+    <link rel="stylesheet" href="{% static 'css/info.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Детали коралла</h1>
+        <nav>
+            <a href="{% url 'info_view' %}">Главная</a>
+            <a href="{% url 'corals_list' %}">Список кораллов</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Коралл: {{ object.name }}</h2>
+            <p>Научное название: {{ object.scientific_name }}</p>
+            <p>Описание: {{ object.description }}</p>
+            <p>Возраст: {{ object.age }}</p>
+            <p>Риф: {{ object.id_reef }}</p>
+            <p>Категория: {{ object.id_category }}</p>
+            <a href="{% url 'corals_update' object.pk %}" class="btn-back">Редактировать</a>
+            <a href="{% url 'corals_delete' object.pk %}" class="btn-back">Удалить</a>
+            <a href="{% url 'corals_list' %}" class="btn-back">Назад к списку</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 CoralWave</p>
+    </footer>
+</body>
+</html>
 <a href="{% url 'corals_list' %}">Back to List</a>

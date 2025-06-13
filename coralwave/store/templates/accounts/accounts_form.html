@@ -20,8 +20,10 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Сохранить</button>
+                <button type="submit" class="btn-save">Сохранить</button>
+                <a href="{% url 'accounts_list' %}" class="btn-back">Назад</a>
             </form>
+            
         </div>
     </main>
     <footer>
