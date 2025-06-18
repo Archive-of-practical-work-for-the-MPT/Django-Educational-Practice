@@ -55,7 +55,7 @@ ROOT_URLCONF = 'coralwave.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'coralwave' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

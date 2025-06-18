@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Countries(models.Model):
     id_country = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=False, blank=False)

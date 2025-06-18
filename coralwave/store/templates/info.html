@@ -5,32 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CoralWave - Сертификаты на кораллы Большого Барьерного рифа</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/info.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
-    <header>
-      <div class="header-content">
-        <h1>CoralWave</h1>
-        <p>Сохраните коралловые рифы Австралии вместе с нами</p>
-      </div>
-    </header>
-
-    <nav>
-      <a href="#">Главная</a>
-      <a href="#certificates">Сертификаты</a>
-      <a href="#about">О проекте</a>
-      <a href="#footer">Контакты</a>
-    </nav>
+    {% include '_inc/_header.html' with header_type='info' %}
 
     <section class="hero">
       <div class="hero-content">
-        <h2>Станьте хранителем кораллового рифа</h2>
+        <h2>Станьте хранителем<br />кораллового рифа</h2>
         <p>
-          Приобретите именной сертификат на коралл в Большом Барьерном рифе
-          Австралии и внесите свой вклад в сохранение морской экосистемы нашей
-          планеты.
+          Сохраняем красоту и биоразнообразие Большого Барьерного рифа вместе с
+          вами. Приобретите именной сертификат на коралл и внесите свой вклад в
+          сохранение морской экосистемы нашей планеты.
         </p>
-        <a href="#certificates" class="btn">Выбрать сертификат</a>
+        <a href="#certificates" class="btn"
+          ><i class="fas fa-arrow-right"></i> Выбрать сертификат</a
+        >
       </div>
     </section>
 
@@ -45,7 +44,9 @@
             />
           </div>
           <div class="certificate-content">
-            <span class="coral-id">ID: AUS-GBR-2023-P001</span>
+            <span class="coral-id"
+              ><i class="fas fa-tag"></i> ID: AUS-GBR-2023-P001</span
+            >
             <h3>Розовый ветвистый коралл</h3>
             <p>
               Сертификат на коралл розового цвета в северной части Большого
@@ -53,7 +54,9 @@
               обновления о состоянии вашего коралла.
             </p>
             <span class="price">5 000 ₽</span>
-            <button class="btn">Оформить сертификат</button>
+            <button class="btn">
+              <i class="fas fa-shopping-cart"></i> Оформить сертификат
+            </button>
           </div>
         </div>
 
@@ -65,7 +68,9 @@
             />
           </div>
           <div class="certificate-content">
-            <span class="coral-id">ID: AUS-GBR-2023-B042</span>
+            <span class="coral-id"
+              ><i class="fas fa-tag"></i> ID: AUS-GBR-2023-B042</span
+            >
             <h3>Голубой мозговой коралл</h3>
             <p>
               Сертификат на редкий голубой мозговой коралл в центральной части
@@ -73,7 +78,9 @@
               коралла и GPS-координаты.
             </p>
             <span class="price">7 500 ₽</span>
-            <button class="btn">Оформить сертификат</button>
+            <button class="btn">
+              <i class="fas fa-shopping-cart"></i> Оформить сертификат
+            </button>
           </div>
         </div>
 
@@ -85,7 +92,9 @@
             />
           </div>
           <div class="certificate-content">
-            <span class="coral-id">ID: AUS-GBR-2023-O118</span>
+            <span class="coral-id"
+              ><i class="fas fa-tag"></i> ID: AUS-GBR-2023-O118</span
+            >
             <h3>Оранжевый веерный коралл</h3>
             <p>
               Сертификат на яркий оранжевый веерный коралл в южной части
@@ -93,7 +102,9 @@
               вашего коралла в естественной среде.
             </p>
             <span class="price">6 200 ₽</span>
-            <button class="btn">Оформить сертификат</button>
+            <button class="btn">
+              <i class="fas fa-shopping-cart"></i> Оформить сертификат
+            </button>
           </div>
         </div>
       </div>
@@ -104,7 +115,7 @@
         <h2 class="section-title">Преимущества нашего проекта</h2>
         <div class="features-grid">
           <div class="feature-item">
-            <div class="feature-icon">🌊</div>
+            <div class="feature-icon"><i class="fas fa-water"></i></div>
             <h3>Реальный вклад</h3>
             <p>
               100% средств направляются на программы сохранения и восстановления
@@ -112,7 +123,7 @@
             </p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">🔍</div>
+            <div class="feature-icon"><i class="fas fa-search"></i></div>
             <h3>Полная прозрачность</h3>
             <p>
               Вы получаете точные GPS-координаты и регулярные обновления о
@@ -120,7 +131,7 @@
             </p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">🎁</div>
+            <div class="feature-icon"><i class="fas fa-gift"></i></div>
             <h3>Уникальный подарок</h3>
             <p>
               Именной сертификат станет необычным и запоминающимся подарком для
@@ -128,7 +139,7 @@
             </p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">🌏</div>
+            <div class="feature-icon"><i class="fas fa-globe"></i></div>
             <h3>Глобальное сообщество</h3>
             <p>
               Присоединяйтесь к международному сообществу хранителей коралловых
@@ -155,46 +166,13 @@
             находятся под угрозой из-за изменения климата и других антропогенных
             факторов.
           </p>
-          <a href="#" class="btn" style="margin-top: 20px">Узнать больше</a>
+          <a href="#" class="btn"
+            ><i class="fas fa-arrow-right"></i> Узнать больше</a
+          >
         </div>
       </div>
     </section>
 
-    <footer id="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>CoralWave</h3>
-          <p>Сохраняем коралловые рифы Австралии вместе с вами с 2022 года.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Навигация</h3>
-          <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="#certificates">Сертификаты</a></li>
-            <li><a href="#about">О проекте</a></li>
-            <li><a href="#footer">Контакты</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Контакты</h3>
-          <ul>
-            <li>Email: info@coralwave.ru</li>
-            <li>Телефон: +7 (929) 916-45-63</li>
-            <li>Адрес: г. Москва, ул. Морская, 42</li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Социальные сети</h3>
-          <ul>
-            <li><a href="#">Telegram</a></li>
-            <li><a href="#">VKontakte</a></li>
-            <li><a href="#">YouTube</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 CoralWave. Все права защищены.</p>
-      </div>
-    </footer>
+    {% include '_inc/_footer.html' with footer_type='info' %}
   </body>
 </html>
