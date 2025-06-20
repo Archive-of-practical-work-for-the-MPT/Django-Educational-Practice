@@ -75,3 +75,13 @@ class ReviewsForm(forms.ModelForm):
     class Meta:
         model = Reviews
         fields = '__all__'
+
+class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = Accounts
+        fields = ['login', 'password']
+
+class LoginForm(forms.Form):
+    login = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)

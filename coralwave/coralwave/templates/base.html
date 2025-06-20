@@ -5,85 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}CoralWave{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/info.css' %}" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="{% static 'css/info.css' %}" rel="stylesheet" />
     {% block extra_css %}{% endblock %}
   </head>
   <body>
-    {% include '_inc/_header.html' %}
-
-    <main class="container py-4">
-      {% if messages %}
-      <div class="messages">
-        {% for message in messages %}
-        <div
-          class="alert alert-{{ message.tags }} alert-dismissible fade show"
-          role="alert"
-        >
-          {{ message }}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          ></button>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %} {% block content %}{% endblock %}
-    </main>
-
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h5>Навигация</h5>
-            <ul class="list-unstyled">
-              <li><a href="{% url 'info_view' %}">Главная</a></li>
-              <li><a href="{% url 'certificates_list' %}">Сертификаты</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h5>Контакты</h5>
-            <ul class="list-unstyled">
-              <li><i class="fas fa-phone me-2"></i>+7 (999) 123-45-67</li>
-              <li><i class="fas fa-envelope me-2"></i>info@coralwave.com</li>
-              <li>
-                <i class="fas fa-map-marker-alt me-2"></i>г. Москва, ул.
-                Примерная, 123
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h5>Мы в соцсетях</h5>
-            <div class="social-links">
-              <a href="#" class="me-2"><i class="fab fa-facebook"></i></a>
-              <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div class="text-center">
-          <p class="mb-0">&copy; 2024 CoralWave. Все права защищены.</p>
-        </div>
-      </div>
-    </footer>
-
-    {% include '_inc/_footer.html' %}
-
+    {% include '_inc/_header.html' with header_type='info' %} {% block content %}{% endblock %} {% include '_inc/_footer.html' with footer_type='info' %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}{% endblock %}
   </body>

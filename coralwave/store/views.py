@@ -3,6 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
 from .forms import *
+from django.contrib import messages
+from django.contrib.auth import logout as django_logout
+from .forms import RegisterForm, LoginForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 def info_view(request):
@@ -488,8 +493,6 @@ class ReviewsDeleteView(DeleteView):
     template_name = 'reviews/reviews_confirm_delete.html'
     success_url = reverse_lazy('reviews_list')
 
-# Account views
-
 
 def account_list(request):
     accounts = Accounts.objects.all()
@@ -561,3 +564,84 @@ def certificates_delete(request, pk):
         certificate.delete()
         return redirect('certificates_list')
     return render(request, 'certificates/certificates_confirm_delete.html', {'object': certificate})
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            account = form.save()
+            user_role = Roles.objects.filter(
+                name__iexact='Пользователь').first()
+            if not user_role:
+                user_role = Roles.objects.create(name='Пользователь')
+            Users.objects.create(
+                name='', lastname='', email='', id_role=user_role, id_account=account
+            )
+            messages.success(
+                request, 'Регистрация прошла успешно. Теперь войдите.')
+            return redirect('login')
+    else:
+        form = RegisterForm()
+    return render(request, 'users/register.html', {'form': form})
+
+# --- Логин ---
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            login = form.cleaned_data['login']
+            password = form.cleaned_data['password']
+            try:
+                account = Accounts.objects.get(login=login, password=password)
+                request.session['account_id'] = account.id_account
+                user = Users.objects.get(id_account=account)
+                request.session['user_id'] = user.id_user
+                request.session['role'] = user.id_role.name
+                messages.success(
+                    request, f'Добро пожаловать, {account.login}!')
+                return redirect('profile')
+            except Accounts.DoesNotExist:
+                form.add_error(None, 'Неверный логин или пароль')
+            except Users.DoesNotExist:
+                form.add_error(None, 'Пользователь не найден')
+    else:
+        form = LoginForm()
+    return render(request, 'users/login.html', {'form': form})
+
+
+def logout_view(request):
+    request.session.flush()
+    django_logout(request)
+    messages.info(request, 'Вы вышли из системы.')
+    return redirect('login')
+
+
+def profile_view(request):
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login')
+    user = Users.objects.select_related(
+        'id_role', 'id_account').get(id_user=user_id)
+    return render(request, 'users/profile.html', {'user': user})
+
+
+def forbidden_view(request):
+    return render(request, 'users/forbidden.html')
+
+
+def admin_required(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        role = request.session.get('role')
+        if role != 'Администратор':
+            return forbidden_view(request)
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+
+account_list = admin_required(account_list)
+account_create = admin_required(account_create)
+account_update = admin_required(account_update)
+account_delete = admin_required(account_delete)

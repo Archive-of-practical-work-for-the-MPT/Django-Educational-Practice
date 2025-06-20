@@ -1,5 +1,5 @@
-{% comment %} Общий header для всех страниц {% endcomment %} {% load static %}
-{# HEADER для info.html #} {% if header_type == 'info' %}
+{% load static %}
+{% if header_type == 'info' %}
 <nav>
   <span class="nav-logo">CoralWave</span>
   <div class="nav-links">
@@ -13,9 +13,18 @@
     <a href="{% url 'info_view' %}#footer"
       ><i class="fas fa-envelope"></i> Контакты</a
     >
+    {% if not request.session.account_id %}
+    <a href="{% url 'register' %}" title="Регистрация"
+      ><i class="fas fa-user-plus"></i
+    ></a>
+    {% else %}
+    <a href="{% url 'logout' %}" title="Выйти"
+      ><i class="fas fa-sign-out-alt"></i
+    ></a>
+    {% endif %}
   </div>
 </nav>
-{% else %} {# HEADER для base.html и account страниц #}
+{% else %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
     <a class="navbar-brand" href="{% url 'info_view' %}">
@@ -48,7 +57,6 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        {# Ссылки на авторизацию/выход убраны, так как таких url нет #}
       </ul>
     </div>
   </div>
