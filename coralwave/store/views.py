@@ -645,3 +645,135 @@ account_list = admin_required(account_list)
 account_create = admin_required(account_create)
 account_update = admin_required(account_update)
 account_delete = admin_required(account_delete)
+
+
+def purchase_certificate(request, certificate_type):
+    """Представление для страницы покупки сертификата"""
+    # Данные о сертификатах (в реальном проекте это было бы в БД)
+    certificate_data = {
+        'pink': {
+            'name': 'Розовый ветвистый коралл',
+            'id': 'AUS-GBR-2023-P001',
+            'price': 5000,
+            'description': 'Сертификат на коралл розового цвета в северной части Большого Барьерного рифа. Включает именной сертификат и ежемесячные обновления о состоянии вашего коралла.',
+            'image': 'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?ixlib=rb-4.0.3'
+        },
+        'blue': {
+            'name': 'Голубой мозговой коралл',
+            'id': 'AUS-GBR-2023-B042',
+            'price': 7500,
+            'description': 'Сертификат на редкий голубой мозговой коралл в центральной части Большого Барьерного рифа. Включает именной сертификат, фото вашего коралла и GPS-координаты.',
+            'image': 'https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-4.0.3'
+        },
+        'orange': {
+            'name': 'Оранжевый веерный коралл',
+            'id': 'AUS-GBR-2023-O118',
+            'price': 6200,
+            'description': 'Сертификат на яркий оранжевый веерный коралл в южной части Большого Барьерного рифа. Включает именной сертификат и видео вашего коралла в естественной среде.',
+            'image': 'https://images.unsplash.com/photo-1513039235271-5937eefe2959?ixlib=rb-4.0.3'
+        }
+    }
+    
+    # Если это custom тип, берем первый сертификат из базы данных
+    if certificate_type == 'custom':
+        try:
+            certificate_type_obj = CertificateTypes.objects.first()
+            if certificate_type_obj:
+                certificate = {
+                    'name': certificate_type_obj.name,
+                    'id': f'CERT-{certificate_type_obj.id_type:04d}',
+                    'price': certificate_type_obj.price or 5000,
+                    'description': certificate_type_obj.description or 'Сертификат на коралл в Большом Барьерном рифе. Включает именной сертификат и регулярные обновления о состоянии вашего коралла.',
+                    'image': 'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?ixlib=rb-4.0.3'
+                }
+            else:
+                return redirect('all_certificates')
+        except:
+            return redirect('all_certificates')
+    elif certificate_type not in certificate_data:
+        return redirect('home')
+    else:
+        certificate = certificate_data[certificate_type]
+    
+    if request.method == 'POST':
+        # Обработка нажатия кнопки "Перевел"
+        return redirect('certificate_success', certificate_type=certificate_type)
+    
+    context = {
+        'certificate': certificate,
+        'certificate_type': certificate_type
+    }
+    return render(request, 'certificates/purchase.html', context)
+
+
+def certificate_success(request, certificate_type):
+    """Представление для страницы успешной покупки сертификата"""
+    certificate_data = {
+        'pink': {
+            'name': 'Розовый ветвистый коралл',
+            'id': 'AUS-GBR-2023-P001',
+            'price': 5000,
+            'image': 'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?ixlib=rb-4.0.3'
+        },
+        'blue': {
+            'name': 'Голубой мозговой коралл',
+            'id': 'AUS-GBR-2023-B042',
+            'price': 7500,
+            'image': 'https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-4.0.3'
+        },
+        'orange': {
+            'name': 'Оранжевый веерный коралл',
+            'id': 'AUS-GBR-2023-O118',
+            'price': 6200,
+            'image': 'https://images.unsplash.com/photo-1513039235271-5937eefe2959?ixlib=rb-4.0.3'
+        }
+    }
+    
+    # Если это custom тип, берем первый сертификат из базы данных
+    if certificate_type == 'custom':
+        try:
+            certificate_type_obj = CertificateTypes.objects.first()
+            if certificate_type_obj:
+                certificate = {
+                    'name': certificate_type_obj.name,
+                    'id': f'CERT-{certificate_type_obj.id_type:04d}',
+                    'price': certificate_type_obj.price or 5000,
+                    'image': 'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?ixlib=rb-4.0.3'
+                }
+            else:
+                return redirect('all_certificates')
+        except:
+            return redirect('all_certificates')
+    elif certificate_type not in certificate_data:
+        return redirect('home')
+    else:
+        certificate = certificate_data[certificate_type]
+    
+    context = {
+        'certificate': certificate,
+        'certificate_type': certificate_type
+    }
+    return render(request, 'certificates/success.html', context)
+
+
+def all_certificates_view(request):
+    """Представление для отображения всех сертификатов из базы данных"""
+    # Получаем параметр поиска
+    search_query = request.GET.get('search', '')
+    
+    # Получаем все типы сертификатов из базы данных
+    certificate_types = CertificateTypes.objects.all()
+    
+    # Применяем фильтр поиска если есть запрос
+    if search_query:
+        certificate_types = certificate_types.filter(name__icontains=search_query)
+    
+    # Если сертификатов нет, передаем пустой список
+    if not certificate_types.exists():
+        certificate_types = []
+    
+    context = {
+        'certificate_types': certificate_types,
+        'search_query': search_query
+    }
+    return render(request, 'certificates/all_certificates.html', context)

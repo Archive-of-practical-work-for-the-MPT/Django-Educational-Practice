@@ -14,6 +14,13 @@ urlpatterns = [
     path('certificates/create/', certificates_create, name='certificates_create'),
     path('certificates/<int:pk>/update/', certificates_update, name='certificates_update'),
     path('certificates/<int:pk>/delete/', certificates_delete, name='certificates_delete'),
+    
+    # Новые маршруты для покупки сертификатов
+    path('purchase/<str:certificate_type>/', purchase_certificate, name='purchase_certificate'),
+    path('certificate/success/<str:certificate_type>/', certificate_success, name='certificate_success'),
+    
+    # Маршрут для страницы всех сертификатов
+    path('all-certificates/', all_certificates_view, name='all_certificates'),
 
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
