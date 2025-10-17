@@ -1,7 +1,7 @@
 # Практическая работа 1 - Разработка главной страницы
 
 ## Как сделать чтобы работало?
-- В [setting.py](https://github.com/Archive-of-practical-work-for-the-MPT/Django-Educational-Practice/blob/six/coralwave/coralwave/settings.py) настройте подключение к вашей БД
+- В [setting.py](https://github.com/Archive-of-practical-work-for-the-MPT/Django-Educational-Practice/blob/first/coralwave/coralwave/settings.py) настройте подключение к вашей БД
 - python -m venv .venv
 - .\venv\Scripts\activate
 - python manage.py migrate
